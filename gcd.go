@@ -1,9 +1,10 @@
 package main
 
 func Gcd(a, b uint32) uint32 {
-	if b == 0 {
-		return a
-	} else {
+	// 割り切れるまで再帰的に呼び出す
+	if b != 0 {
 		return Gcd(b, a%b)
 	}
+
+	return a
 }
