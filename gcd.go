@@ -10,11 +10,7 @@ func Gcd(a, b uint32) uint32 {
 }
 
 func GcdVec(vec []uint32) uint32 {
-	if len(vec) == 0 {
-		return 0
-	}
-
-	var result = vec[0]
+	result := uint32(0)
 
 	for _, num := range vec {
 		result = Gcd(result, num)
