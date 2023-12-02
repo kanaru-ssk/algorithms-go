@@ -29,3 +29,29 @@ func TestLcm(t *testing.T) {
 		t.Fatalf("error")
 	}
 }
+
+func TestLcmVec(t *testing.T) {
+	if LcmVec([]uint32{18, 12}) != 36 {
+		t.Fatalf("error")
+	}
+
+	if LcmVec([]uint32{36, 12, 48, 120}) != 720 {
+		t.Fatalf("error")
+	}
+
+	if LcmVec([]uint32{36, 12, 48, 0}) != 0 {
+		t.Fatalf("error")
+	}
+
+	if LcmVec([]uint32{0, 0, 0}) != 0 {
+		t.Fatalf("error")
+	}
+
+	if LcmVec([]uint32{3}) != 3 {
+		t.Fatalf("error")
+	}
+
+	if LcmVec([]uint32{}) != 0 {
+		t.Fatalf("error")
+	}
+}
