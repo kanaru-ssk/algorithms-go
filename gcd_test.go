@@ -29,3 +29,29 @@ func TestGcd(t *testing.T) {
 		t.Fatalf("error")
 	}
 }
+
+func TestGcdVec(t *testing.T) {
+	if GcdVec([]uint32{18, 12}) != 6 {
+		t.Fatalf("error")
+	}
+
+	if GcdVec([]uint32{36, 12, 48, 120}) != 12 {
+		t.Fatalf("error")
+	}
+
+	if GcdVec([]uint32{0, 0, 0}) != 0 {
+		t.Fatalf("error")
+	}
+
+	if GcdVec([]uint32{10, 0, 25}) != 5 {
+		t.Fatalf("error")
+	}
+
+	if GcdVec([]uint32{3}) != 3 {
+		t.Fatalf("error")
+	}
+
+	if GcdVec([]uint32{}) != 0 {
+		t.Fatalf("error")
+	}
+}
