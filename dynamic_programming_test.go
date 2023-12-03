@@ -14,7 +14,7 @@ func TestProgrammingKnapsack(t *testing.T) {
 		{Id: 3, Cost: 250, Value: 8},
 		{Id: 4, Cost: 200, Value: 5},
 		{Id: 5, Cost: 50, Value: 1}}
-	calcCell := func(table [][]uint32, y, x uint32) uint32 {
+	calcCell := func(y, x uint32, table [][]uint32, items []Item) uint32 {
 		if y == 0 {
 			return 0
 		}
@@ -25,12 +25,12 @@ func TestProgrammingKnapsack(t *testing.T) {
 	}
 
 	capacity1 := uint32(500)
-	if DynamicProgramming(uint32(len(items)+1), capacity1+1, calcCell) != 16 {
+	if DynamicProgramming(items, capacity1, calcCell) != 16 {
 		t.Fatalf("error")
 	}
 
 	capacity2 := uint32(720)
-	if DynamicProgramming(uint32(len(items)+1), capacity2+1, calcCell) != 21 {
+	if DynamicProgramming(items, capacity2, calcCell) != 21 {
 		t.Fatalf("error")
 	}
 }
@@ -39,7 +39,7 @@ func TestBinPacking(t *testing.T) {
 
 	capacity := uint32(10)
 	items := []uint32{4, 7, 8, 5, 1}
-	calcCell := func(table [][]bool, y, x uint32) bool {
+	calcCell := func(y, x uint32, table [][]bool, items []uint32) bool {
 		if y == 0 {
 			return x == 0
 		}
@@ -52,13 +52,14 @@ func TestBinPacking(t *testing.T) {
 		return table[y-1][x-items[y-1]]
 	}
 
-	if DynamicProgramming(uint32(len(items)+1), capacity+1, calcCell) != true {
+	if DynamicProgramming(items, capacity, calcCell) != true {
 		t.Fatalf("error")
 	}
 }
 
 func TestFibonacci(t *testing.T) {
-	calcCell := func(table [][]uint32, y, x uint32) uint32 {
+	var items []uint32
+	calcCell := func(y, x uint32, table [][]uint32, items []uint32) uint32 {
 		if x <= 0 {
 			return 0
 		}
@@ -83,7 +84,8 @@ func TestFibonacci(t *testing.T) {
 	}
 
 	for _, s := range samples {
-		if actual := DynamicProgramming(1, s.Input+1, calcCell); actual != s.Expected {
+
+		if actual := DynamicProgramming(items, s.Input, calcCell); actual != s.Expected {
 			t.Errorf("Abs(%v) = %v, want %v", s.Input, actual, s.Expected)
 		}
 	}
