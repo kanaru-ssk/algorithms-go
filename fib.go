@@ -1,6 +1,9 @@
 package main
 
 func Fib1(n uint32) uint32 {
+	if n == 0 {
+		return 0
+	}
 	if n <= 2 {
 		return 1
 	}
@@ -9,18 +12,15 @@ func Fib1(n uint32) uint32 {
 }
 
 func Fib2(n uint32) uint32 {
-	if n == 0 || n == 1 {
-		return n
+	calcCell := func(y, x uint32, table [][]uint32, items []uint32) uint32 {
+		if x == 0 {
+			return 0
+		}
+		if x <= 2 {
+			return 1
+		}
+		return table[y][x-1] + table[y][x-2]
 	}
 
-	a := make([]uint32, n)
-
-	a[0] = 1
-	a[1] = 1
-
-	for i := uint32(2); i < n; i++ {
-		a[i] = a[i-1] + a[i-2]
-	}
-
-	return a[n-1]
+	return DynamicProgramming([]uint32{}, n, calcCell)
 }
