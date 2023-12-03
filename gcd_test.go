@@ -5,53 +5,41 @@ import (
 )
 
 func TestGcd(t *testing.T) {
-	if Gcd(18, 12) != 6 {
-		t.Fatalf("error")
+	samples := []struct {
+		Input    []uint32
+		Expected uint32
+	}{
+		{Input: []uint32{18, 12}, Expected: 6},
+		{Input: []uint32{12, 18}, Expected: 6},
+		{Input: []uint32{1, 1}, Expected: 1},
+		{Input: []uint32{10, 0}, Expected: 10},
+		{Input: []uint32{0, 10}, Expected: 10},
+		{Input: []uint32{0, 0}, Expected: 0},
 	}
 
-	if Gcd(12, 18) != 6 {
-		t.Fatalf("error")
-	}
-
-	if Gcd(1, 1) != 1 {
-		t.Fatalf("error")
-	}
-
-	if Gcd(10, 0) != 10 {
-		t.Fatalf("error")
-	}
-
-	if Gcd(0, 10) != 10 {
-		t.Fatalf("error")
-	}
-
-	if Gcd(0, 0) != 0 {
-		t.Fatalf("error")
+	for _, s := range samples {
+		if result := Gcd(s.Input[0], s.Input[1]); result != s.Expected {
+			t.Errorf("Gcd(%v, %v) = %v, but expected %v", s.Input[0], s.Input[1], result, s.Expected)
+		}
 	}
 }
 
 func TestGcdVec(t *testing.T) {
-	if GcdVec([]uint32{18, 12}) != 6 {
-		t.Fatalf("error")
+	samples := []struct {
+		Input    []uint32
+		Expected uint32
+	}{
+		{Input: []uint32{18, 12}, Expected: 6},
+		{Input: []uint32{36, 12, 48, 120}, Expected: 12},
+		{Input: []uint32{0, 0, 0}, Expected: 0},
+		{Input: []uint32{3}, Expected: 3},
+		{Input: []uint32{0}, Expected: 0},
+		{Input: []uint32{}, Expected: 0},
 	}
 
-	if GcdVec([]uint32{36, 12, 48, 120}) != 12 {
-		t.Fatalf("error")
-	}
-
-	if GcdVec([]uint32{0, 0, 0}) != 0 {
-		t.Fatalf("error")
-	}
-
-	if GcdVec([]uint32{10, 0, 25}) != 5 {
-		t.Fatalf("error")
-	}
-
-	if GcdVec([]uint32{3}) != 3 {
-		t.Fatalf("error")
-	}
-
-	if GcdVec([]uint32{}) != 0 {
-		t.Fatalf("error")
+	for _, s := range samples {
+		if result := GcdVec(s.Input); result != s.Expected {
+			t.Errorf("GcdVec(%v) = %v, but expected %v", s.Input, result, s.Expected)
+		}
 	}
 }
