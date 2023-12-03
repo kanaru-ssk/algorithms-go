@@ -4,7 +4,7 @@ type Item struct {
 	Id, Cost, Value uint32
 }
 
-func Knapsack(capacity uint32, items []Item) uint32 {
+func DynamicProgramming(capacity uint32, items []Item) uint32 {
 	numItem := len(items)
 
 	// 最大公約数で割ってtableの大きさを最適化
